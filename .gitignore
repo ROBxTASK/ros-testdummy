@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+ros_home/action_ws/
+*.pid
+rospack_cache*
+devel/
+log/
+build/
+install/
+bin/
+lib/

@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  ros-testdummy-action-server:
+    image: robxtask/ros-testdummy:staging
+    environment:
+      - "ROS_HOME=/ros"
+    volumes: 
+      - ./ros_home:/ros/
+    networks: 
+      - rosnet
+    command: /ros/create_and_run.sh action_ws
+  ros-testdummy-action-client:
+    image: robxtask/ros-testdummy:staging
+    environment:
+      - "ROS_HOME=/ros"
+      - "ROS_MASTER_URI=http://ros-testdummy-action-server:11311"
+    volumes: 
+      - ./ros_home:/ros/
+    networks: 
+      - rosnet
+    depends_on: 
+      - ros-testdummy-action-server
+    command: /ros/run_client.sh action_ws
+
+  turtlesim:
+    image: robxtask/ros-testdummy:staging
+    environment:
+      - "DISPLAY=${EXTERNAL_IP}:0.0"
+      - "ROS_MASTER_URI=http://ros-testdummy-action-server:11311"
+    depends_on: 
+      - ros-testdummy-action-server
+    networks: 
+      - rosnet
+    command: ros2 run turtlesim turtlesim_node
+
+  xterm:
+    image: robxtask/ros-testdummy:staging
+    environment:
+      - "DISPLAY=${EXTERNAL_IP}:0.0"
+      - "ROS_MASTER_URI=http://ros-testdummy-action-server:11311"
+    depends_on: 
+      - ros-testdummy-action-server
+    networks: 
+      - rosnet
+    command: xterm
+    volumes: 
+      - ./ros_home:/ros/
+
+  rqt:
+    image: robxtask/ros-testdummy:staging
+    environment:
+      - "DISPLAY=${EXTERNAL_IP}:0.0"
+      - "ROS_MASTER_URI=http://ros-testdummy-action-server:11311"
+    depends_on: 
+      - ros-testdummy-action-server
+    networks: 
+      - rosnet
+    command: rqt
+
+  term:
+    image: robxtask/ros-testdummy:staging
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes: 
+      - ./ros_home:/ros/
+    networks: 
+      - rosnet
+    command: bash
+
+networks:
+  rosnet:
+    external:
+      name: staging_rosnet_default
