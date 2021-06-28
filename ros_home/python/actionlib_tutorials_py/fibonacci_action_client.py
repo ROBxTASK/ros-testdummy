@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python
 
 import rospy
 
@@ -38,4 +38,4 @@ if __name__ == '__main__':
         result = fibonacci_client()
         print("Result:", ', '.join([str(n) for n in result.sequence]))
     except rospy.ROSInterruptException:
-        print("program interrupted before completion", file=sys.stderr)
+        print("program interrupted before completion")
