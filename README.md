@@ -3,7 +3,7 @@
 Container for testing distributed ROS Actions, Services and Messaging
 
 
-##Steps to start this demonstrator from root directory:
+## Steps to start this demonstrator from root directory:
 
 Step 1) Build Docker:
 "./build-docker.sh"
@@ -18,7 +18,7 @@ Step 4) Check for running docker image:
 "docker ps"
 
 
-##Instead of run.sh you can start client and server independantly in separate shells to see all output:
+## Instead of run.sh you can start client and server independantly in separate shells to see all output:
 
 ROS1)
 Server) "docker-compose up -d ros-testdummy-action-server #xterm rqt" (use "#xterm rqt" if you have local server)
