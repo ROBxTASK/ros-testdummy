@@ -20,6 +20,6 @@ Step 4) Check for running docker image:
 
 ## Instead of run.sh you can start client and server independantly in separate shells to see all output:
 
-ROS1)
 Server) "docker-compose up -d ros-testdummy-action-server #xterm rqt" (use "#xterm rqt" if you have local server)
+
 Client) "docker-compose up ros-testdummy-action-client"
